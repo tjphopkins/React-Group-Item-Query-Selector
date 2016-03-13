@@ -1,5 +1,6 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('lodash')
 
 var AppDispatcher = require('../utils/AppDispatcher');
 var ActionTypes = require('../constants').ActionTypes;
@@ -10,8 +11,8 @@ var CHANGE_EVENT = 'change';
 // New object with EventEmitter methods e.g. emit, on and removeListener
 var ItemStore = assign({}, EventEmitter.prototype, {
 
-    // Synchronously calls each of the listeners registered by components for the
-    // change event
+    // Synchronously calls each of the listeners registered by components for
+    // the change event
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
@@ -45,6 +46,10 @@ var ItemStore = assign({}, EventEmitter.prototype, {
 
     getGroups: function() {
         return this_groups;
+    },
+
+    getSelectedItems: function() {
+        return _.clone(this.selectedItemIds);
     },
 
     _setSelectedItems: function(selectedItemIds) {

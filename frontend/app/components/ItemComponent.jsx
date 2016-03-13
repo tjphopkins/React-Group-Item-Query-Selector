@@ -2,16 +2,14 @@
 
 var React = require('react');
 
-var ItemListComponent = require('./components/ItemListComponent')
 
+var ItemComponent = React.createClass({
 
-// Create an App component, extending the React base 'Component' class
-var AppComponent = React.createClass({
+  props
   render: function() {
     return (
       <div className="item-selector">
             Hello, world! I am a CommentBox.
-            <ItemListComponent {...this.props} />
       </div>
     )
   }

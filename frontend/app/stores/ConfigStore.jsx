@@ -5,7 +5,6 @@ var _config = {}
 var ConfigStore = {
 
     init: function(config) {
-        console.log("config", config);
         _config = config;
     },
 

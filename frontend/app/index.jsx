@@ -11,6 +11,7 @@ var ConfigStore = require('./stores/ConfigStore');
 var ItemStore = require('./stores/ItemStore');
 var AppComponent = require('./AppComponent');
 
+
 window.QuerySelector = {
     init: function(el, config) {
         ConfigStore.init(config)
