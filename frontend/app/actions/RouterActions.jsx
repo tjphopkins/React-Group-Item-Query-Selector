@@ -7,9 +7,9 @@ var ActionTypes = require('../constants').ActionTypes;
 var RouterActions = {
 
     changeRoute: function(pathname, query) {
-        console.log(pathname, query)
+        console.log("change route with query", query);
         AppDispatcher.handleRouterAction({
-          actionType: ActionTypes.ROUTER_ACTION,
+          actionType: ActionTypes.CHANGE_ROUTE,
           path: pathname,
           query: query
         });

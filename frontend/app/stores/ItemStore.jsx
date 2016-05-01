@@ -49,7 +49,7 @@ var ItemStore = assign({}, EventEmitter.prototype, {
     },
 
     getSelectedItems: function() {
-        return _.clone(this.selectedItemIds);
+        return _.clone(this._selectedItemIds);
     },
 
     _setSelectedItems: function(selectedItemIds) {
@@ -61,11 +61,12 @@ var ItemStore = assign({}, EventEmitter.prototype, {
         if (query.hasOwnProperty('item_ids')) {
             if (query.items_ids === "") {
                 selectedItemIds = [];
-            }
-        } else {
+            } else {
+            console.log("item ids", query.item_ids);
             selectedItemIds = query.item_ids.split('_');
+            }
+            this._setSelectedItems(selectedItemIds);
         }
-        this._setSelectedItems(selectedItemIds);
     }
 
 });
@@ -74,8 +75,8 @@ ItemStore.dispatcherIndex = AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.actionType) {
-      case ActionTypes.CHANGE_ROUTE:
-        this._routeChanged(action.query);
+        case ActionTypes.CHANGE_ROUTE:
+            ItemStore._routeChanged(action.query);
 
     }
 
