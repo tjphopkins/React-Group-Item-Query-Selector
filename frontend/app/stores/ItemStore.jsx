@@ -45,7 +45,7 @@ var ItemStore = assign({}, EventEmitter.prototype, {
     },
 
     getGroups: function() {
-        return this_groups;
+        return this._groups;
     },
 
     getSelectedItems: function() {
