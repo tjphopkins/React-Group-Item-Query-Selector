@@ -62,7 +62,6 @@ var ItemStore = assign({}, EventEmitter.prototype, {
             if (query.items_ids === "") {
                 selectedItemIds = [];
             } else {
-            console.log("item ids", query.item_ids);
             selectedItemIds = query.item_ids.split('_');
             }
             this._setSelectedItems(selectedItemIds);

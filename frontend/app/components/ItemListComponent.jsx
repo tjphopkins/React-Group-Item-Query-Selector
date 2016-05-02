@@ -38,7 +38,7 @@ var ItemListComponent = React.createClass({
 
     },
 
-    // Respond to state change after initial render
+    // Responds to changes in state that occur after initial render
     componentWillUpdate: function() {
         if (this.state.submit) {
             this.props.history.push({
@@ -55,52 +55,52 @@ var ItemListComponent = React.createClass({
         return false;
     },
 
-    // TODO: Should this method go in the ItemStore?
-    _findItemsInGroup: function(groupId) {
-        _.filter(this.state.items, function(i) {return groupId in i.groups});
+    // TODO: This method should go in the ItemStore and items belonging to
+    // groups should only be calculated once
+    _findItemsInGroupIds: function(groupId) {
+        var itemsInGroup = _.filter(this.state.items, function(i) {
+            return i.groups.indexOf(groupId) != -1});
+        return _.map(itemsInGroup, function(i) {return i.id});
     },
 
     _isSelected: function(itemId) {
         if (this._isItem(itemId)) {
-            return itemId in this.state.selectedItemIds;
+            return this.state.selectedItemIds.indexOf(itemId) != -1;
         } else {
-            var itemsInGroup = this._findItemsInGroup();
-            return
-                _.every(itemsInGroup, function(i) {return this._isSelected(i)});
+            var itemsInGroupIds = this._findItemsInGroupIds(itemId);
+            // TODO: Is there a nicer way of making 'this' available inside
+            // anon fn?
+            var self = this;
+            return _.every(
+                itemsInGroupIds, function(i) {return self._isSelected(i)});
         }
     },
 
     toggleSelected: function(itemId) {
-        if (this._isSelected(itemId)) {
-            var newSelectedItemIds = [];
+        if (!this._isSelected(itemId)) {
             if (this._isItem(itemId)) {
+                var newSelectedItemIds = _.clone(this.state.selectedItemIds)
                 newSelectedItemIds.push(itemId);
             } else {
-                var itemsInGroup = this._findItemsInGroup();
-                var itemsInGroupIds = _.map(
-                    itemsInGroup, function(i) {return i.id});
-                newSelectedItemIds = _.union(
-                    [this.state.selectedItemIds, itemsInGroupIds]);
+                var itemsInGroupIds = this._findItemsInGroupIds(itemId);
+                var newSelectedItemIds = _.union(
+                    this.state.selectedItemIds, itemsInGroupIds);
 
             }
         } else {
-            var removeItemIds = [];
             if (this._isItem(itemId)) {
-                removeItemIds.push(itemId);
+                var removeItemIds = [itemId];
             } else {
-                var itemsInGroup = this._findItemsInGroup();
-                var itemsInGroupIds = _.map(
-                    itemsInGroup, function(i) {return i.id});
-                removeItemIds.push(itemsInGroupIds);
+                var removeItemIds = this._findItemsInGroupIds(itemId);
             }
-            newSelectedItemIds = _.without(
+            newSelectedItemIds = _.difference(
                 this.state.selectedItemIds, removeItemIds);
 
         }
-        // this.setState({
-        //     selectedItemIds: newSelectedItemIds,
-        //     submit: false
-        // });
+        this.setState({
+            selectedItemIds: newSelectedItemIds,
+            submit: false
+        });
     },
 
     // submit: function() {
@@ -110,7 +110,6 @@ var ItemListComponent = React.createClass({
     // },
 
     render: function() {
-        console.log("context", this.context)
         var itemsToRender = []
         var groupsToRender = []
         for (var item of this.state.items) {
@@ -124,13 +123,12 @@ var ItemListComponent = React.createClass({
         for (var group of this.state.groups) {
             groupsToRender.push(
                 <ItemComponent item={group} key={group.id} isGroup={true}
-                               isSelected={this._isSelected(item.id)}
+                               isSelected={this._isSelected(group.id)}
                                toggleSelected={this.toggleSelected}
                 />
             );
         }
 
-        // <button onClick={this.submit()}>Submit</button>
         return (
             <div>
                 <div className="group-list">

@@ -12,21 +12,21 @@ def index():
             {
                 "id": "1",
                 "name": "Item 1",
-                "groups": ["1"]
+                "groups": ["3"]
             },
             {
                 "id": "2",
                 "name": "Item 2",
-                "groups": ["2"]
+                "groups": ["4"]
             }
         ],
         "groups": [
             {
-                "id": "1",
+                "id": "3",
                 "name": "Group 1"
             },
             {
-                "id": "2",
+                "id": "4",
                 "name": "Group 2"
             },
 

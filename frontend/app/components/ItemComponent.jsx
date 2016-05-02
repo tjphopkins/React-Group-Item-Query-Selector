@@ -14,18 +14,18 @@ var ItemComponent = React.createClass({
         toggleSelected: React.PropTypes.func.isRequired,
     },
 
+    _handleChange: function(event) {
+        this.props.toggleSelected(this.props.item.id);
+    },
+
     render: function() {
         return (
             <div>
-                <div className="item-selector">
-                    {`Hello, world! I am an Item. My name is
-                      ${this.props.item.name}.`}
-                </div>
                 <label>
                 {`${this.props.item.name}`}
                 <input type="checkbox"
                        checked={this.props.isSelected}
-                       onChange={this.props.toggleSelected}
+                       onChange={this._handleChange}
                 />
                 </label>
             </div>
