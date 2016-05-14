@@ -11,7 +11,9 @@ var getStateFromStores = function() {
     return {
         items: ItemStore.getItems(),
         groups: ItemStore.getGroups(),
-        selectedItemIds: ItemStore.getSelectedItems()
+        selectedItemIds: ItemStore.getSelectedItems(),
+        groupItemIdMap: ItemStore.getGroupItemIdMap(),
+        submit: false
     }
 }
 
@@ -39,11 +41,11 @@ var ItemListComponent = React.createClass({
     },
 
     // Responds to changes in state that occur after initial render
-    componentWillUpdate: function() {
-        if (this.state.submit) {
+    componentWillUpdate: function(newProps, newState) {
+        if (newState.submit) {
             this.props.history.push({
                 pathname: this.props.location.pathname,
-                query: {item_ids: this.state.selectedItemIds.join("_")}
+                query: {item_ids: newState.selectedItemIds.join("_")}
             });
         }
     },
@@ -55,19 +57,11 @@ var ItemListComponent = React.createClass({
         return false;
     },
 
-    // TODO: This method should go in the ItemStore and items belonging to
-    // groups should only be calculated once
-    _findItemsInGroupIds: function(groupId) {
-        var itemsInGroup = _.filter(this.state.items, function(i) {
-            return i.groups.indexOf(groupId) != -1});
-        return _.map(itemsInGroup, function(i) {return i.id});
-    },
-
     _isSelected: function(itemId) {
         if (this._isItem(itemId)) {
             return this.state.selectedItemIds.indexOf(itemId) != -1;
         } else {
-            var itemsInGroupIds = this._findItemsInGroupIds(itemId);
+            var itemsInGroupIds = this.state.groupItemIdMap[itemId];
             // TODO: Is there a nicer way of making 'this' available inside
             // anon fn?
             var self = this;
@@ -82,7 +76,7 @@ var ItemListComponent = React.createClass({
                 var newSelectedItemIds = _.clone(this.state.selectedItemIds)
                 newSelectedItemIds.push(itemId);
             } else {
-                var itemsInGroupIds = this._findItemsInGroupIds(itemId);
+                var itemsInGroupIds = this.state.groupItemIdMap[itemId];
                 var newSelectedItemIds = _.union(
                     this.state.selectedItemIds, itemsInGroupIds);
 
@@ -91,7 +85,7 @@ var ItemListComponent = React.createClass({
             if (this._isItem(itemId)) {
                 var removeItemIds = [itemId];
             } else {
-                var removeItemIds = this._findItemsInGroupIds(itemId);
+                var removeItemIds = this.state.groupItemIdMap[itemId];
             }
             newSelectedItemIds = _.difference(
                 this.state.selectedItemIds, removeItemIds);
@@ -103,11 +97,11 @@ var ItemListComponent = React.createClass({
         });
     },
 
-    // submit: function() {
-    //     this.setState({
-    //         submit: true
-    //     });
-    // },
+    submit: function() {
+        this.setState({
+            submit: true
+        });
+    },
 
     render: function() {
         var itemsToRender = []
@@ -139,6 +133,7 @@ var ItemListComponent = React.createClass({
                     Hello, I am the item list
                     {itemsToRender}
                 </div>
+                <button onClick={this.submit}>Go!</button>
             </div>
         )
     }

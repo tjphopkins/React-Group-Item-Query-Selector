@@ -30,6 +30,7 @@ var ItemStore = assign({}, EventEmitter.prototype, {
     _items: {},
     _groups: {},
     _selectedItemIds: {},
+    _groupItemIdMap: {},
 
     init: function(config) {
         this._items = config.items;
@@ -38,6 +39,9 @@ var ItemStore = assign({}, EventEmitter.prototype, {
 
         this._groups = config.groups;
         Object.freeze(this._groups);
+
+        this._setGroupItemIdsMap();
+        Object.freeze(this._groupItemIdMap);
     },
 
     getItems: function() {
@@ -54,6 +58,21 @@ var ItemStore = assign({}, EventEmitter.prototype, {
 
     _setSelectedItems: function(selectedItemIds) {
         this._selectedItemIds = selectedItemIds
+    },
+
+
+    getGroupItemIdMap: function() {
+        return _.clone(this._groupItemIdMap);
+    },
+
+    _setGroupItemIdsMap: function() {
+        for (var group of this._groups) {
+            var groupId = group.id;
+            var itemsInGroup = _.filter(this._items, function(i) {
+                return i.groups.indexOf(groupId) != -1});
+            this._groupItemIdMap[groupId] = _.map(
+                itemsInGroup, function(i) {return i.id});
+        }
     },
 
     _routeChanged: function(query) {
