@@ -34,5 +34,5 @@ var ItemComponent = React.createClass({
 
 })
 
-module.exports = ItemComponent  // CommonJS modularize
+module.exports = ItemComponent
 

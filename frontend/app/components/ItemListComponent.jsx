@@ -3,8 +3,9 @@
 _ = require('lodash');
 var React = require('react');
 
-var ItemStore = require('../stores/ItemStore')
-var ItemComponent = require('./ItemComponent')
+var ItemStore = require('../stores/ItemStore');
+var ItemComponent = require('./ItemComponent');
+var SearchComponent = require('./SearchComponent');
 
 
 var getStateFromStores = function() {
@@ -13,7 +14,8 @@ var getStateFromStores = function() {
         groups: ItemStore.getGroups(),
         selectedItemIds: ItemStore.getSelectedItems(),
         groupItemIdMap: ItemStore.getGroupItemIdMap(),
-        submit: false
+        submit: false,
+        filterText: null
     }
 }
 
@@ -104,10 +106,31 @@ var ItemListComponent = React.createClass({
         });
     },
 
+    filterItems: function(filterText) {
+        this.setState({
+            filterText: filterText.toLowerCase()
+        });
+    },
+
+    _isFilteredOut: function(item) {
+        return (this.state.filterText &&
+            item.name.toLowerCase().indexOf(this.state.filterText) < 0)
+    },
+
+    clearSelectedItems: function() {
+        this.setState({
+            selectedItemIds: [],
+            submit: false
+        });
+    },
+
     render: function() {
         var itemsToRender = []
         var groupsToRender = []
         for (var item of this.state.items) {
+            if (this._isFilteredOut(item)) {
+                continue;
+            }
             itemsToRender.push(
                 <ItemComponent item={item} key={item.id} isGroup={false}
                                isSelected={this._isSelected(item.id)}
@@ -116,6 +139,9 @@ var ItemListComponent = React.createClass({
             );
         }
         for (var group of this.state.groups) {
+            if (this._isFilteredOut(group)) {
+                continue;
+            }
             groupsToRender.push(
                 <ItemComponent item={group} key={group.id} isGroup={true}
                                isSelected={this._isSelected(group.id)}
@@ -125,16 +151,24 @@ var ItemListComponent = React.createClass({
         }
 
         return (
-            <div>
+            <div className="selector-container">
+                <span onClick={this.clearSelectedItems}>Clear Selection</span>
+                <SearchComponent
+                    filterItems={this.filterItems}
+                    numberItems={this.state.items.length}
+                    numberGroups={this.state.items.length} />
                 <div className="group-list">
-                    Hello, I am the group list
                     {groupsToRender}
                 </div>
+                <span className="divider" />
                 <div className="item-list">
-                    Hello, I am the item list
                     {itemsToRender}
                 </div>
-                <button onClick={this.submit}>Go!</button>
+                <div className="submit-selection">
+                    <button onClick={this.submit}>
+                        Submit
+                    </button>
+                </div>
             </div>
         )
     }
