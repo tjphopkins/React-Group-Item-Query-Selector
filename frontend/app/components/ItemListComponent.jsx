@@ -17,13 +17,14 @@ var getStateFromStores = function() {
     }
 }
 
-// Create an App component, extending the React base 'Component' class
 var ItemListComponent = React.createClass({
 
     getInitialState: function() {
         return getStateFromStores();
     },
 
+    // Immediately after initial render, register a listener function for when
+    // ItemStore emits a change
     componentDidMount: function() {
         ItemStore.addChangeListener(this._onChange);
     },
@@ -139,5 +140,5 @@ var ItemListComponent = React.createClass({
     }
 })
 
-module.exports = ItemListComponent  // CommonJS modularize
+module.exports = ItemListComponent
 
