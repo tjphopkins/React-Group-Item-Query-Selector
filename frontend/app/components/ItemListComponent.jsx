@@ -151,8 +151,10 @@ var ItemListComponent = React.createClass({
         }
 
         return (
-            <div className="selector-container">
-                <span onClick={this.clearSelectedItems}>Clear Selection</span>
+            <div className="selector">
+                <span className="clear-selection"
+                      onClick={this.clearSelectedItems}>
+                    Clear Selection</span>
                 <SearchComponent
                     filterItems={this.filterItems}
                     numberItems={this.state.items.length}

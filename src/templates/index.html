@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+ href={{ url_for('static', filename='style.css') }}>
 <title>React Multi Group/Item Query Selector</title>
 </head>
 
 <body>
-<div class='query-selector-container'></div>
+<div class='item-selector-container'></div>
 <script type="text/javascript" src={{ url_for('static', filename='app.js') }}></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             window.QuerySelector = new QuerySelector.init(
-                document.getElementsByClassName('query-selector-container')[0],
+                document.getElementsByClassName('item-selector-container')[0],
                 {{ config|safe }}
             );
         });
