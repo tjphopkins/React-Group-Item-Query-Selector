@@ -7,12 +7,12 @@
 </head>
 
 <body>
-<div class='item-selector-container'></div>
+<div class='selector-container'></div>
 <script type="text/javascript" src={{ url_for('static', filename='app.js') }}></script>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             window.QuerySelector = new QuerySelector.init(
-                document.getElementsByClassName('item-selector-container')[0],
+                document.getElementsByClassName('selector-container')[0],
                 {{ config|safe }}
             );
         });

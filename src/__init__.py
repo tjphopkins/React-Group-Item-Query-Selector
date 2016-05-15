@@ -12,21 +12,41 @@ def index():
             {
                 "id": "1",
                 "name": "Item 1",
-                "groups": ["3"]
+                "groups": ["7"]
             },
             {
                 "id": "2",
                 "name": "Item 2",
-                "groups": ["4"]
+                "groups": ["8"]
+            },
+            {
+                "id": "3",
+                "name": "Item 3",
+                "groups": ["7"]
+            },
+            {
+                "id": "4",
+                "name": "Item 4",
+                "groups": ["8"]
+            },
+            {
+                "id": "5",
+                "name": "Item 5",
+                "groups": ["7"]
+            },
+            {
+                "id": "6",
+                "name": "Item 6",
+                "groups": []
             }
         ],
         "groups": [
             {
-                "id": "3",
+                "id": "7",
                 "name": "Group 1"
             },
             {
-                "id": "4",
+                "id": "8",
                 "name": "Group 2"
             },
 

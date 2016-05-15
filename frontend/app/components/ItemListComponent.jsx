@@ -151,27 +151,31 @@ var ItemListComponent = React.createClass({
         }
 
         return (
-            <div className="selector">
-                <span className="clear-selection"
+            <ul className="selector-menu">
+                <li className="clear-selection"
                       onClick={this.clearSelectedItems}>
-                    Clear Selection</span>
-                <SearchComponent
-                    filterItems={this.filterItems}
-                    numberItems={this.state.items.length}
-                    numberGroups={this.state.items.length} />
-                <div className="group-list">
+                    Clear Selection</li>
+                <li>
+                    <SearchComponent
+                        filterItems={this.filterItems}
+                        numberItems={this.state.items.length}
+                        numberGroups={this.state.items.length} />
+                </li>
+                <li className="divider" />
+                <li className="group-list">
                     {groupsToRender}
-                </div>
-                <span className="divider" />
-                <div className="item-list">
+                </li>
+                <li className="divider" />
+                <li className="item-list">
                     {itemsToRender}
-                </div>
-                <div className="submit-selection">
+                </li>
+                <li className="divider" />
+                <li className="submit-selection">
                     <button onClick={this.submit}>
                         Submit
                     </button>
-                </div>
-            </div>
+                </li>
+            </ul>
         )
     }
 })

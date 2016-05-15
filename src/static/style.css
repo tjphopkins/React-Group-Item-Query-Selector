@@ -1,5 +1,45 @@
-.item-selector-container {
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #444;
+}
+
+.selector-container {
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.selector-menu {
+    margin: 0;
+    padding: 0;
+}
+
+.selector-menu li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.clear-selection {
+    float: right;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.clear-selection:hover {
+    text-decoration: underline;
+}
+
+.search-box input {
+    width: 190px;
+    padding: 3px;
+}
+
+.divider {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.submit-selection {
+    float: right;
 }

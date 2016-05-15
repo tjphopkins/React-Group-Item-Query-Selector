@@ -21,13 +21,11 @@ var ItemComponent = React.createClass({
     render: function() {
         return (
             <div>
-                <label>
-                {`${this.props.item.name}`}
                 <input type="checkbox"
                        checked={this.props.isSelected}
                        onChange={this._handleChange}
                 />
-                </label>
+                <label>{`${this.props.item.name}`}</label>
             </div>
         )
     }
