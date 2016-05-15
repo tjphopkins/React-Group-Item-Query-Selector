@@ -22,7 +22,8 @@ var SearchComponent = React.createClass({
                 <input
                     type="text" name="filterItems"
                     onKeyUp={this._filter}
-                    placeholder={`Search ${this.props.numberGroups} groups and ${this.props.numberItems} items`}
+                    placeholder={`Search ${this.props.numberGroups} groups`
+                    + ` and ${this.props.numberItems} items`}
                 />
             </div>
         )

@@ -40,6 +40,18 @@ body {
     border-bottom: 1px solid #ccc;
 }
 
+.item {
+    margin: 5px 0 5px 0;
+}
+
+.item.group {
+    font-weight: bold;
+}
+
+.item label {
+    margin-left: 5px;
+}
+
 .submit-selection {
     float: right;
 }

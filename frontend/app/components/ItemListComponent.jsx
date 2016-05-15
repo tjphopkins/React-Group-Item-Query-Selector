@@ -134,6 +134,7 @@ var ItemListComponent = React.createClass({
             itemsToRender.push(
                 <ItemComponent item={item} key={item.id} isGroup={false}
                                isSelected={this._isSelected(item.id)}
+                               isGroup={false}
                                toggleSelected={this.toggleSelected}
                 />
             );
@@ -145,6 +146,7 @@ var ItemListComponent = React.createClass({
             groupsToRender.push(
                 <ItemComponent item={group} key={group.id} isGroup={true}
                                isSelected={this._isSelected(group.id)}
+                               isGroup={true}
                                toggleSelected={this.toggleSelected}
                 />
             );

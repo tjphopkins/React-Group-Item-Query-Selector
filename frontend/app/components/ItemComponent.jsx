@@ -18,9 +18,15 @@ var ItemComponent = React.createClass({
         this.props.toggleSelected(this.props.item.id);
     },
 
+
     render: function() {
+        var className = "item";
+        if (this.props.isGroup) {
+            className += " group";
+        }
+
         return (
-            <div>
+            <div className={className}>
                 <input type="checkbox"
                        checked={this.props.isSelected}
                        onChange={this._handleChange}
