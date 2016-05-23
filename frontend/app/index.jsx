@@ -11,6 +11,20 @@ var ConfigStore = require('./stores/ConfigStore');
 var ItemStore = require('./stores/ItemStore');
 var AppComponent = require('./AppComponent');
 
+/*
+The QuerySelector enables selection of items and groups.
+Items can belong to any number of groups, as specified in the
+configuration passed from the backend.
+
+If all items in the group are selected, the group is automatically
+selected.
+
+If a group is selected, all items in the group are automatically
+selected.
+
+On submission of the selection, a new state is pushed to the Router
+history, updating the query to reflect the new selection of items.
+*/
 
 window.QuerySelector = {
     init: function(el, config) {
