@@ -13,11 +13,11 @@ var AppComponent = require('./AppComponent');
 
 window.QuerySelector = {
     init: function(el, config) {
-        console.log("config", config)
+        ConfigStore.init(config)
+        ItemStore.init(config)
+
         HistoryManager.startListening();
         const history = HistoryManager.getHistory();
-
-        ConfigStore.init(config)
 
         // Render the Router component into the DOM into
         // the supplied container element
