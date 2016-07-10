@@ -13,6 +13,7 @@ var AppComponent = require('./AppComponent');
 
 window.QuerySelector = {
     init: function(el, config) {
+        console.log("config", config)
         HistoryManager.startListening();
         const history = HistoryManager.getHistory();
 
