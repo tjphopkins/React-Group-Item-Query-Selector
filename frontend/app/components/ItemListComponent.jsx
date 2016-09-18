@@ -54,6 +54,8 @@ let ItemListComponent = React.createClass({
     },
 
     _isItem: function(itemId) {
+        // Check if the item represented by itemID is an item. If it is,
+        // return true, else if it is a group, return false.
         if (_.find(this.state.items, function(i) {return i.id == itemId})) {
             return true;
         }
@@ -61,12 +63,12 @@ let ItemListComponent = React.createClass({
     },
 
     _isSelected: function(itemId) {
+        // Return a bool indicating whether hte iterm represented by itemId
+        // is selected.
         if (this._isItem(itemId)) {
             return this.state.selectedItemIds.indexOf(itemId) != -1;
         } else {
             let itemsInGroupIds = this.state.groupItemIdMap[itemId];
-            // TODO: Is there a nicer way of making 'this' available inside
-            // anon fn?
             let self = this;
             return _.every(
                 itemsInGroupIds, function(i) {return self._isSelected(i)});
@@ -74,12 +76,16 @@ let ItemListComponent = React.createClass({
     },
 
     toggleSelected: function(itemId) {
+        // Toggle selection of item with id itemId. Handles both groups
+        // and items.
         let newSelectedItemIds = [];
         if (!this._isSelected(itemId)) {
             if (this._isItem(itemId)) {
                 newSelectedItemIds = _.clone(this.state.selectedItemIds);
                 newSelectedItemIds.push(itemId);
             } else {
+                // Selecting a group has the effect of selecting all the items
+                // belonging in that group.
                 let itemsInGroupIds = this.state.groupItemIdMap[itemId];
                 newSelectedItemIds = _.union(
                     this.state.selectedItemIds, itemsInGroupIds);
@@ -90,6 +96,7 @@ let ItemListComponent = React.createClass({
             if (this._isItem(itemId)) {
                 removeItemIds = [itemId];
             } else {
+                // Deselecting a group will deselect all of its items.
                 removeItemIds = this.state.groupItemIdMap[itemId];
             }
             newSelectedItemIds = _.difference(
@@ -115,11 +122,13 @@ let ItemListComponent = React.createClass({
     },
 
     _isFilteredOut: function(item) {
+        // Returns a bool indicating whether the item does not match filter
         return (this.state.filterText &&
             item.name.toLowerCase().indexOf(this.state.filterText) < 0)
     },
 
     clearSelectedItems: function() {
+        // Clears all selected items.
         this.setState({
             selectedItemIds: [],
             submit: false

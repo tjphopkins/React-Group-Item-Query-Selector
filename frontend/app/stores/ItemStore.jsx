@@ -17,8 +17,8 @@ let ItemStore = assign({}, EventEmitter.prototype, {
         this.emit(CHANGE_EVENT);
     },
 
-    // Method for components to register their listener function for the change
-    // event
+    // Method with which components may register their callback functions for
+    // the change event
     addChangeListener: function(callback) {
         this.on(CHANGE_EVENT, callback);
     },
