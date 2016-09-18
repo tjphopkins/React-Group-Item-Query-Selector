@@ -127,6 +127,7 @@ var ItemListComponent = React.createClass({
     render: function() {
         var itemsToRender = []
         var groupsToRender = []
+
         for (var item of this.state.items) {
             if (this._isFilteredOut(item)) {
                 continue;
@@ -139,6 +140,13 @@ var ItemListComponent = React.createClass({
                 />
             );
         }
+
+        if (itemsToRender.length == 0) {
+            itemsToRender.push(
+                <p key="para">No items matching your search</p>
+            )
+        }
+
         for (var group of this.state.groups) {
             if (this._isFilteredOut(group)) {
                 continue;
@@ -149,6 +157,12 @@ var ItemListComponent = React.createClass({
                                isGroup={true}
                                toggleSelected={this.toggleSelected}
                 />
+            );
+        }
+
+        if (groupsToRender.length == 0) {
+            groupsToRender.push(
+                <p key="para">No groups matching your search</p>
             );
         }
 
