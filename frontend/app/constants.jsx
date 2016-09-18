@@ -14,4 +14,4 @@ module.exports = {
     PayloadSources: keyMirror({
         ROUTER_ACTION: null
     })
-}
+};

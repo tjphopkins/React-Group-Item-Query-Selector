@@ -17,7 +17,7 @@ let getStateFromStores = function() {
         submit: false,
         filterText: null
     }
-}
+};
 
 let ItemListComponent = React.createClass({
 
@@ -77,7 +77,7 @@ let ItemListComponent = React.createClass({
         let newSelectedItemIds = [];
         if (!this._isSelected(itemId)) {
             if (this._isItem(itemId)) {
-                newSelectedItemIds = _.clone(this.state.selectedItemIds)
+                newSelectedItemIds = _.clone(this.state.selectedItemIds);
                 newSelectedItemIds.push(itemId);
             } else {
                 let itemsInGroupIds = this.state.groupItemIdMap[itemId];
@@ -127,8 +127,8 @@ let ItemListComponent = React.createClass({
     },
 
     render: function() {
-        let itemsToRender = []
-        let groupsToRender = []
+        let itemsToRender = [];
+        let groupsToRender = [];
 
         for (let item of this.state.items) {
             if (this._isFilteredOut(item)) {
@@ -146,7 +146,7 @@ let ItemListComponent = React.createClass({
         if (itemsToRender.length == 0) {
             itemsToRender.push(
                 <p key="para">No items matching your search</p>
-            )
+            );
         }
 
         for (let group of this.state.groups) {
@@ -194,9 +194,9 @@ let ItemListComponent = React.createClass({
                     </button>
                 </li>
             </ul>
-        )
+        );
     }
-})
+});
 
-module.exports = ItemListComponent
+module.exports = ItemListComponent;
 

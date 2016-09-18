@@ -1,6 +1,6 @@
 let EventEmitter = require('events').EventEmitter;
 let assign = require('object-assign');
-let _ = require('lodash')
+let _ = require('lodash');
 
 let AppDispatcher = require('../utils/AppDispatcher');
 let ActionTypes = require('../constants').ActionTypes;

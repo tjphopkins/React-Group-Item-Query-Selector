@@ -28,8 +28,8 @@ history, updating the query to reflect the new selection of items.
 
 window.QuerySelector = {
     init: function(el, config) {
-        ConfigStore.init(config)
-        ItemStore.init(config)
+        ConfigStore.init(config);
+        ItemStore.init(config);
 
         HistoryManager.startListening();
         const history = HistoryManager.getHistory();
@@ -43,4 +43,4 @@ window.QuerySelector = {
             , el
         );
     }
-}
+};

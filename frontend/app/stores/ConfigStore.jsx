@@ -1,6 +1,6 @@
 "use strict";
 
-let _config = {}
+let _config = {};
 
 let ConfigStore = {
 
@@ -12,6 +12,6 @@ let ConfigStore = {
         // Return a clone so that the config can't be to modified externally
         return _.cloneDeep(_config);
     }
-}
+};
 
-module.exports = ConfigStore
+module.exports = ConfigStore;

@@ -1,6 +1,6 @@
 "use strict";
 
-let _ = require('lodash')
+let _ = require('lodash');
 let ReactRouter = require('react-router');
 let BrowserHistory = ReactRouter.browserHistory;
 

@@ -2,6 +2,7 @@
 
 let React = require('react');
 
+
 let ItemComponent = React.createClass({
 
     propTypes: {
@@ -36,7 +37,7 @@ let ItemComponent = React.createClass({
         )
     }
 
-})
+});
 
-module.exports = ItemComponent
+module.exports = ItemComponent;
 

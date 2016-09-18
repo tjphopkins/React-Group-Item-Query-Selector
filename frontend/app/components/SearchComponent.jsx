@@ -2,6 +2,7 @@
 
 let React = require('react');
 
+
 let SearchComponent = React.createClass({
 
     propTypes: {
@@ -26,10 +27,10 @@ let SearchComponent = React.createClass({
                     + ` and ${this.props.numberItems} items`}
                 />
             </div>
-        )
+        );
     }
 
 })
 
-module.exports = SearchComponent
+module.exports = SearchComponent;
 

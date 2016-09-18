@@ -2,10 +2,9 @@
 
 let React = require('react');
 
-let ItemListComponent = require('./components/ItemListComponent')
+let ItemListComponent = require('./components/ItemListComponent');
 
 
-// Create an App component, extending the React base 'Component' class
 let AppComponent = React.createClass({
     render: function() {
         return (
@@ -13,9 +12,8 @@ let AppComponent = React.createClass({
             // component by the Router. It is important we pass these down to
             // the ItemListComponent. For simplicity we pass down all props.
             <ItemListComponent {...this.props} />
-        )
+        );
     }
-})
+});
 
-module.exports = AppComponent  // CommonJS modularize
-
+module.exports = AppComponent;

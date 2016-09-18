@@ -16,4 +16,4 @@ let RouterActions = {
 
 };
 
-module.exports = RouterActions
+module.exports = RouterActions;
