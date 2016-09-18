@@ -1,8 +1,8 @@
 "use strict";
 
-var _config = {}
+let _config = {}
 
-var ConfigStore = {
+let ConfigStore = {
 
     init: function(config) {
         _config = config;

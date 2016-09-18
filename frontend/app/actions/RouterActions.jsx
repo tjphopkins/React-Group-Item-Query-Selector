@@ -1,10 +1,10 @@
 "use strict";
 
-var AppDispatcher = require('../utils/AppDispatcher');
-var ActionTypes = require('../constants').ActionTypes;
+let AppDispatcher = require('../utils/AppDispatcher');
+let ActionTypes = require('../constants').ActionTypes;
 
 
-var RouterActions = {
+let RouterActions = {
 
     changeRoute: function(pathname, query) {
         AppDispatcher.handleRouterAction({

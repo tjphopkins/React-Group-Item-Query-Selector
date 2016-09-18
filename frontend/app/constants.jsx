@@ -2,7 +2,7 @@
 
 // maintain a collection of constants in the form of string literals that can be
 // referenced by name
-var keyMirror = require('keyMirror');
+let keyMirror = require('keyMirror');
 
 
 module.exports = {

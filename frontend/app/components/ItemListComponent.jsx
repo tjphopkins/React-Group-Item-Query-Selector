@@ -1,14 +1,14 @@
 "use strict";
 
 _ = require('lodash');
-var React = require('react');
+let React = require('react');
 
-var ItemStore = require('../stores/ItemStore');
-var ItemComponent = require('./ItemComponent');
-var SearchComponent = require('./SearchComponent');
+let ItemStore = require('../stores/ItemStore');
+let ItemComponent = require('./ItemComponent');
+let SearchComponent = require('./SearchComponent');
 
 
-var getStateFromStores = function() {
+let getStateFromStores = function() {
     return {
         items: ItemStore.getItems(),
         groups: ItemStore.getGroups(),
@@ -19,7 +19,7 @@ var getStateFromStores = function() {
     }
 }
 
-var ItemListComponent = React.createClass({
+let ItemListComponent = React.createClass({
 
     getInitialState: function() {
         return getStateFromStores();
@@ -36,7 +36,7 @@ var ItemListComponent = React.createClass({
     },
 
     _onChange: function() {
-        var newState = getStateFromStores();
+        let newState = getStateFromStores();
         if (! _.isEqual(newState, this.state)) {
             this.setState(newState);
         }
@@ -64,31 +64,33 @@ var ItemListComponent = React.createClass({
         if (this._isItem(itemId)) {
             return this.state.selectedItemIds.indexOf(itemId) != -1;
         } else {
-            var itemsInGroupIds = this.state.groupItemIdMap[itemId];
+            let itemsInGroupIds = this.state.groupItemIdMap[itemId];
             // TODO: Is there a nicer way of making 'this' available inside
             // anon fn?
-            var self = this;
+            let self = this;
             return _.every(
                 itemsInGroupIds, function(i) {return self._isSelected(i)});
         }
     },
 
     toggleSelected: function(itemId) {
+        let newSelectedItemIds = [];
         if (!this._isSelected(itemId)) {
             if (this._isItem(itemId)) {
-                var newSelectedItemIds = _.clone(this.state.selectedItemIds)
+                newSelectedItemIds = _.clone(this.state.selectedItemIds)
                 newSelectedItemIds.push(itemId);
             } else {
-                var itemsInGroupIds = this.state.groupItemIdMap[itemId];
-                var newSelectedItemIds = _.union(
+                let itemsInGroupIds = this.state.groupItemIdMap[itemId];
+                newSelectedItemIds = _.union(
                     this.state.selectedItemIds, itemsInGroupIds);
 
             }
         } else {
+            let removeItemIds = [];
             if (this._isItem(itemId)) {
-                var removeItemIds = [itemId];
+                removeItemIds = [itemId];
             } else {
-                var removeItemIds = this.state.groupItemIdMap[itemId];
+                removeItemIds = this.state.groupItemIdMap[itemId];
             }
             newSelectedItemIds = _.difference(
                 this.state.selectedItemIds, removeItemIds);
@@ -125,10 +127,10 @@ var ItemListComponent = React.createClass({
     },
 
     render: function() {
-        var itemsToRender = []
-        var groupsToRender = []
+        let itemsToRender = []
+        let groupsToRender = []
 
-        for (var item of this.state.items) {
+        for (let item of this.state.items) {
             if (this._isFilteredOut(item)) {
                 continue;
             }
@@ -147,7 +149,7 @@ var ItemListComponent = React.createClass({
             )
         }
 
-        for (var group of this.state.groups) {
+        for (let group of this.state.groups) {
             if (this._isFilteredOut(group)) {
                 continue;
             }

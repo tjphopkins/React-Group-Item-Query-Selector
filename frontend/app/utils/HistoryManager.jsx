@@ -1,11 +1,11 @@
 "use strict";
 
-var _ = require('lodash')
-var ReactRouter = require('react-router');
-var BrowserHistory = ReactRouter.browserHistory;
+let _ = require('lodash')
+let ReactRouter = require('react-router');
+let BrowserHistory = ReactRouter.browserHistory;
 
-var ConfigStore = require('../stores/ConfigStore');
-var RouterActions = require('../actions/RouterActions');
+let ConfigStore = require('../stores/ConfigStore');
+let RouterActions = require('../actions/RouterActions');
 
 
 const _history = BrowserHistory;
@@ -14,8 +14,8 @@ class HistoryManager {
 
     _handleRouteChange(location) {
         if (_.isEmpty(location.query)) {
-            var config = ConfigStore.getConfig();
-            var selectedItemIds = config.selected_item_ids.join("_");
+            let config = ConfigStore.getConfig();
+            let selectedItemIds = config.selected_item_ids.join("_");
             // replace the current histroy entry with one including default
             // query params
             _history.replace({

@@ -1,15 +1,15 @@
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var _ = require('lodash')
+let EventEmitter = require('events').EventEmitter;
+let assign = require('object-assign');
+let _ = require('lodash')
 
-var AppDispatcher = require('../utils/AppDispatcher');
-var ActionTypes = require('../constants').ActionTypes;
+let AppDispatcher = require('../utils/AppDispatcher');
+let ActionTypes = require('../constants').ActionTypes;
 
 
-var CHANGE_EVENT = 'change';
+let CHANGE_EVENT = 'change';
 
 // New object with EventEmitter methods e.g. emit, on and removeListener
-var ItemStore = assign({}, EventEmitter.prototype, {
+let ItemStore = assign({}, EventEmitter.prototype, {
 
     // Synchronously calls each of the listeners registered by components for
     // the change event
@@ -66,9 +66,9 @@ var ItemStore = assign({}, EventEmitter.prototype, {
     },
 
     _setGroupItemIdsMap: function() {
-        for (var group of this._groups) {
-            var groupId = group.id;
-            var itemsInGroup = _.filter(this._items, function(i) {
+        for (let group of this._groups) {
+            let groupId = group.id;
+            let itemsInGroup = _.filter(this._items, function(i) {
                 return i.groups.indexOf(groupId) != -1});
             this._groupItemIdMap[groupId] = _.map(
                 itemsInGroup, function(i) {return i.id});
@@ -76,7 +76,7 @@ var ItemStore = assign({}, EventEmitter.prototype, {
     },
 
     _routeChanged: function(query) {
-        var selectedItemIds
+        let selectedItemIds
         if (query.hasOwnProperty('item_ids')) {
             if (query.items_ids === "") {
                 selectedItemIds = [];
@@ -90,7 +90,7 @@ var ItemStore = assign({}, EventEmitter.prototype, {
 });
 
 ItemStore.dispatcherIndex = AppDispatcher.register(function(payload) {
-    var action = payload.action;
+    let action = payload.action;
 
     switch(action.actionType) {
         case ActionTypes.CHANGE_ROUTE:

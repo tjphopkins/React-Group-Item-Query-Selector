@@ -1,15 +1,15 @@
 "use strict";
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
+let React = require('react');
+let ReactDOM = require('react-dom');
+let ReactRouter = require('react-router');
+let Router = ReactRouter.Router;
+let Route = ReactRouter.Route;
 
-var HistoryManager = require('./utils/HistoryManager');
-var ConfigStore = require('./stores/ConfigStore');
-var ItemStore = require('./stores/ItemStore');
-var AppComponent = require('./AppComponent');
+let HistoryManager = require('./utils/HistoryManager');
+let ConfigStore = require('./stores/ConfigStore');
+let ItemStore = require('./stores/ItemStore');
+let AppComponent = require('./AppComponent');
 
 /*
 The QuerySelector enables selection of items and groups.

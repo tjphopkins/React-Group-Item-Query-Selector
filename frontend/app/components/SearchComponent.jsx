@@ -1,8 +1,8 @@
 "use strict";
 
-var React = require('react');
+let React = require('react');
 
-var SearchComponent = React.createClass({
+let SearchComponent = React.createClass({
 
     propTypes: {
         filterItems: React.PropTypes.func.isRequired,
@@ -11,7 +11,7 @@ var SearchComponent = React.createClass({
     },
 
     _filter: function(event) {
-        var filterText = document.getElementsByName(
+        let filterText = document.getElementsByName(
             "filterItems")[0].value;
         this.props.filterItems(filterText);
     },

@@ -1,8 +1,8 @@
 "use strict";
 
-var React = require('react');
+let React = require('react');
 
-var ItemComponent = React.createClass({
+let ItemComponent = React.createClass({
 
     propTypes: {
         item: React.PropTypes.shape({
@@ -20,7 +20,7 @@ var ItemComponent = React.createClass({
 
 
     render: function() {
-        var className = "item";
+        let className = "item";
         if (this.props.isGroup) {
             className += " group";
         }
