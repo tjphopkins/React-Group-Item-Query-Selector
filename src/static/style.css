@@ -31,6 +31,7 @@ body {
 }
 
 .search-box input {
+    height: 20px;
     width: 190px;
     padding: 3px;
 }
